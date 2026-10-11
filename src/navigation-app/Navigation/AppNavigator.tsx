@@ -1,6 +1,8 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+
 import HomeScreen from "../Screens/HomeScreen";
 import PokemonList from "../Screens/PokemonList";
 import PokenmonDetails from "../Screens/PokenmonDetails";
@@ -42,6 +44,8 @@ const ListStackDisplay = () => {
 };
 
 const AppNavigator = () => {
+  const insets = useSafeAreaInsets();
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -49,9 +53,9 @@ const AppNavigator = () => {
         tabBarStyle: {
           backgroundColor: "#27272a",
           borderTopColor: "#3f3f46",
-          paddingBottom: 5,
           paddingTop: 5,
-          height: 60,
+          paddingBottom: Math.max(insets.bottom, 5),
+          height: 60 + insets.bottom,
         },
         tabBarActiveTintColor: "#34d399",
         tabBarInactiveTintColor: "#a1a1a1",

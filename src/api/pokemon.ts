@@ -18,7 +18,7 @@ export interface PokemonTypeEntry {
   };
 }
 
-export interface PokemonStats {
+export interface PokemonStat {
   base_stat: number;
   stat: {
     name: string;
@@ -29,7 +29,7 @@ export interface PokemonDetail {
   id: number;
   name: string;
   types: PokemonTypeEntry[];
-  stats: PokemonStats[];
+  stats: PokemonStat[];
   sprites: {
     front_default: string;
     other: {
@@ -56,28 +56,34 @@ export const getPokemonList = async (
   const response = await fetch(
     `${BASE_URL}/pokemon?limit=${limit}&offset=${offset}`,
   );
+
   if (!response.ok) {
-    throw new Error("Failed to fetch Pokémon list");
+    throw new Error("Failed to fetch pokemon list");
   }
 
   return response.json();
 };
 
 export const getPokemonDetail = async (
-  nameorid: string | number,
+  nameOrId: string | number,
 ): Promise<PokemonDetail> => {
-  const response = await fetch(`${BASE_URL}/pokemon/${nameorid}`);
+  const response = await fetch(`${BASE_URL}/pokemon/${nameOrId}`);
+
   if (!response.ok) {
-    throw new Error(`Failed to fetch Pokémon details for ${nameorid}`);
+    throw new Error("Failed to fetch pokemon details");
   }
+
   return response.json();
 };
 
 export const getPokemonByType = async (type: string): Promise<PokemonRef[]> => {
   const response = await fetch(`${BASE_URL}/type/${type}`);
+
   if (!response.ok) {
-    throw new Error(`Failed to fetch Pokémon by type ${type}`);
+    throw new Error(`Failed to fetch type: ${type}`);
   }
+
   const data = await response.json();
+
   return data.pokemon.map((item: any) => item.pokemon);
 };

@@ -1,32 +1,33 @@
-import { ColorKey, COLORS } from "./colors";
+import { COLORS, ColorKey } from "./colors";
 
-export const POKEMON_TPYES = [
+export const POKEMON_TYPES = [
   "normal",
-  "fighting",
-  "flying",
   "fire",
   "water",
-  "grass",
-  "steel",
   "electric",
-  "ground",
-  "rock",
+  "grass",
   "ice",
+  "fighting",
   "poison",
-  "bug",
-  "ghost",
+  "ground",
+  "flying",
   "psychic",
+  "bug",
+  "rock",
+  "ghost",
   "dragon",
-  "dark",
+  "steel",
   "fairy",
 ] as const;
 
-export type PokemonType = (typeof POKEMON_TPYES)[number];
+export type PokemonType = (typeof POKEMON_TYPES)[number];
 
 export const getTypeColor = (type: string): string => {
   const normalizedType = type.toLowerCase();
+
   if (normalizedType in COLORS) {
     return COLORS[normalizedType as ColorKey];
   }
+
   return COLORS.subtext;
 };

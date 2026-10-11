@@ -1,17 +1,18 @@
 import { RouteProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { PokemonDetail } from "../../api/pokemon";
 
 export type RootStackParamList = {
-  HomeScreen: undefined;
-  PokemonList: undefined;
-  PokemonDetails: { pokemon: any };
+  Home: undefined;
+  PokemonList: undefined; // Or filters
+  PokemonDetail: { pokemon: PokemonDetail };
 };
 
 export type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
-  "HomeScreen"
+  "Home"
 >;
-export type PokemonListNavigationProp = RouteProp<
+export type PokemonDetailScreenRouteProp = RouteProp<
   RootStackParamList,
-  "PokemonList"
+  "PokemonDetail"
 >;
